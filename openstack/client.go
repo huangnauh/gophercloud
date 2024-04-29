@@ -443,7 +443,8 @@ func NewDNSV2(client *gophercloud.ProviderClient, eo gophercloud.EndpointOpts) (
 // image service.
 func NewImageServiceV2(client *gophercloud.ProviderClient, eo gophercloud.EndpointOpts) (*gophercloud.ServiceClient, error) {
 	sc, err := initClientOpts(client, eo, "image")
-	sc.ResourceBase = sc.Endpoint + "v2/"
+	endpoint := strings.Replace(sc.Endpoint, "v2/", "", -1)
+	sc.ResourceBase = endpoint + "v2/"
 	return sc, err
 }
 
